@@ -10,9 +10,6 @@ count = 0
 os.system("sudo /sbin/ip link set can0 up type can bitrate 500000")
 time.sleep(0.1)
 bus = can.interface.Bus(channel='can0', bustype='socketcan_native')
-#msg = can.Message(arbitration_id=0x7de,data=[0, 25, 0, 1, 3, 1, 4, 1])
-#bus.send(msg)
-#notifier = can.Notifier(bus, [can.Printer()])
 
 triggerInputPin = 4
 plus = 0
@@ -54,6 +51,9 @@ def callbackFromDue10ms(triggerInputPin):
 
         message = getCANMessage(0x407)
         printCANMessage(message) #Id = ffff is no found Id error message
+
+#        msg = can.Message(arbitration_id=0x7de,data=[0x00,0x01,0x02, 0x03, 0x04, 0x05,0x06, count & 0xff],extended_id=False)
+#        bus.send(msg)
 
         plus += 1
         #print(plus)
